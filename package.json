@@ -1,0 +1,22 @@
+{
+  "name": "clubhouse-to-linear-exporter",
+  "version": "1.0.0",
+  "description": "Pulls Clubhouse tickets and creates them back in Linear",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pleo-io/clubhouse-to-linear-exporter.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pleo-io/clubhouse-to-linear-exporter/issues"
+  },
+  "homepage": "https://github.com/pleo-io/clubhouse-to-linear-exporter#readme",
+  "dependencies": {
+    "axios": "^0.21.1"
+  }
+}
