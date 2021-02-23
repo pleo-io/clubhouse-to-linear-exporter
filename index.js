@@ -87,8 +87,8 @@ function createLinearStory(story) {
   }).then((storyDetails) => {
     const currentState = teamMap[TEAM_NAME].clubhouse.states[story.workflow_state_id];
 
-    rl.question(`\t#${story.id}\t[${story.story_type}]\t[${currentState}]\t${story.name}\n\n\t${storyDetails.data.description}\n\n\t${story.app_url}\n\n${'-'.repeat(80)}\nImport this ticket (Y/N)?: `, (answer) => {
-      if (answer[0].toLowerCase() === 'y') {
+    rl.question(`\t#${story.id}\t[${story.story_type}]\t[${currentState}]\t${story.name}\n\n\t${storyDetails.data.description}\n\n\t${story.created_at}\n\n\t${story.app_url}\n\n${'-'.repeat(80)}\nImport this ticket (Y/N)?: `, (answer) => {
+      if (answer[0] && answer[0].toLowerCase() === 'y') {
         console.log('\nImporting...');
 
         return axios.post(linearUrl, { query: `
@@ -133,8 +133,9 @@ function init() {
   if (!LINEAR_API_TOKEN) throw new Error(`Missing LINEAR_API_TOKEN env variable.`);
 
   return loadStories().then((stories) => {
-    storiesFound = stories.data.length;
-    return sequence(stories.data, createLinearStory)
+    stories = stories.data.filter((story) => story.story_type === 'bug')
+    storiesFound = stories.length;
+    return sequence(stories, createLinearStory)
       .then(() => {
         console.clear();
         console.log(`Imported ${storiesImported} stories out of ${storiesFound}`);
